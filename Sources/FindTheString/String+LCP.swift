@@ -2,7 +2,7 @@ import Foundation
 
 extension String {
     /// obtains the longest common prefix between self and the param
-    func longestCommonPrefix(_ b: String) -> String {
+    public func longestCommonPrefix(_ b: String) -> String {
         let min = min(count, b.count)
         let aPrefix = String(prefix(min))
         let bPrefix = String(b.prefix(min))

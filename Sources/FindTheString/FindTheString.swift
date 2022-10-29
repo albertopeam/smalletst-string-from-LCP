@@ -20,18 +20,30 @@ public func findTheString(_ lcp: [[Int]]) -> String {
     
     var word = (0..<max).compactMap({ _ in englishAlphabet[0] })
     for (i, data) in lcp.enumerated() {
-        for (j, value) in data.enumerated() {
-            let a = word[word.index(after: i)...].joined()
-            let b = word[word.index(after: j)...].joined()
-            let lcp = a.longestCommonPrefix(b)
-            if lcp.count != word.count {
-                //TODO: +1 to the word using the j prefix:
-                    //TODO: pick j index in the word and extract it
-                    //TODO: find the word in the alphabet and pick the next one. edge case is 'z'???
-                    //TODO: replace the word and continue                
+        for (j, expectedLcpCount) in data.enumerated() {
+            var solution: Bool = false
+            var offset: Int = 0
+            let defaultCharacter = word[j]
+            while !solution {
+                let currentCharacter = word[j+offset]
+                let iTilFinishWord = word[i...].joined()
+                let jTilFinishWord = word[j...].joined()
+                let currentLcp = iTilFinishWord.longestCommonPrefix(jTilFinishWord)
+                let currentLcpCount = currentLcp.count
+                if currentLcpCount != expectedLcpCount {
+                    if let nextAlphabetCharacter = englishAlphabet.drop(while: { $0 != currentCharacter }).dropFirst().first {
+                        word[j+offset] = nextAlphabetCharacter
+                    } else if j+offset < word.count-1 {
+                        word[j] = defaultCharacter
+                        offset += 1
+                    } else {
+                        return impossible
+                    }
+                } else {
+                    solution = true
+                }
             }
         }
     }
-    
-    return impossible
+    return word.joined()
 }

@@ -1,2 +1,4 @@
-# smalletst-string-from-LCP
-Find the alphabetically smallest string that conforms to the LCP array
+# Find the smalletst string from LCP matrix
+
+![Statement](summary.png)
+

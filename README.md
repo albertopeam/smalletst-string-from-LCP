@@ -1,3 +1,2 @@
-# FindTheString
-
-A description of this package.
+# smalletst-string-from-LCP
+Find the alphabetically smallest string that conforms to the LCP array
